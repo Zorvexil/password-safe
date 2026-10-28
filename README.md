@@ -26,7 +26,6 @@ Password Safe is currently under active development. Some features may be incomp
 - **C** — Main programming language.
 - **GTK4** — Graphical user interface.
 - **libsodium** — Cryptographic library.
-- **Argon2id** — Password-based key derivation, if implemented in the current version.
 
 ## Requirements
 
