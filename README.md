@@ -1,41 +1,48 @@
 # Password Safe
 
-A lightweight, open-source password manager built with **C, GTK4, and libsodium**.
+**Version:** `0.1.0-dev`  
+**Status:** Early development — not production-ready  
+**License:** GNU General Public License v2.0
 
-Password Safe is a desktop application designed to store account credentials in a local encrypted vault, with a focus on simplicity, privacy, and security.
+Password Safe is a lightweight, open-source password manager built with C, GTK4, and libsodium.
+
+The project aims to provide a simple desktop application for managing passwords locally, with a focus on privacy, usability, and security.
+
+Password Safe is currently under active development. Some features may be incomplete, and the application has not undergone an independent security audit.
 
 ## Features
 
-- **Local storage** — Keep your credentials in a local vault.
-- **Encrypted vault** — Protect stored credentials using cryptographic libraries.
-- **Password generation** — Generate strong passwords with configurable rules.
+- **Local storage** — Designed to keep password data on the local device.
+- **Encrypted vault** — Intended to protect stored credentials using cryptographic libraries.
+- **Password generation** — A feature for generating strong passwords.
 - **Account management** — Organize credentials for different accounts and services.
-- **GTK4 interface** — A native desktop interface.
-- **Open source** — Built with free and open-source software.
+- **GTK4 interface** — A graphical desktop interface built with GTK4.
+- **Open source** — Free and open-source software that can be studied and improved by the community.
+
+*Features may be incomplete or subject to change during development.*
 
 ## Technologies
 
-- C
-- GTK4
-- libsodium
-- Argon2id for password-based key derivation
+- **C** — Main programming language.
+- **GTK4** — Graphical user interface.
+- **libsodium** — Cryptographic library.
+- **Argon2id** — Password-based key derivation, if implemented in the current version.
 
 ## Requirements
 
-To build Password Safe from source, you need:
+To build Password Safe from source, you may need:
 
 - GCC or Clang
 - GTK4 development libraries
 - libsodium development libraries
 - `pkg-config`
+- GNU Make (if a Makefile is added)
 
 ## Installation
 
-### Linux
+### Fedora
 
-#### Fedora
-
-Install the dependencies:
+Install the required development packages:
 
 ```bash
 sudo dnf install gcc gtk4-devel libsodium-devel pkgconf-pkg-config
@@ -48,38 +55,11 @@ git clone https://github.com/Zorvexil/password-safe.git
 cd password-safe
 ```
 
-Compile the application:
+Compile the source file:
 
 ```bash
-gcc -Wall -Wextra -O2 password_safe.c \
-    -o password-safe \
-    $(pkg-config --cflags --libs gtk4 libsodium)
-```
-
-Run it:
-
-```bash
-./password-safe
-```
-
-#### Ubuntu and Debian
-
-Install the dependencies:
-
-```bash
-sudo apt update
-sudo apt install build-essential libgtk-4-dev libsodium-dev pkg-config
-```
-
-Clone and compile:
-
-```bash
-git clone https://github.com/Zorvexil/password-safe.git
-cd password-safe
-
-gcc -Wall -Wextra -O2 password_safe.c \
-    -o password-safe \
-    $(pkg-config --cflags --libs gtk4 libsodium)
+gcc password_safe.c -o password-safe \
+  $(pkg-config --cflags --libs gtk4 libsodium)
 ```
 
 Run the application:
@@ -88,127 +68,94 @@ Run the application:
 ./password-safe
 ```
 
-#### Arch Linux
+### Ubuntu / Debian
 
 Install the dependencies:
 
 ```bash
-sudo pacman -S --needed base-devel gtk4 libsodium pkgconf
+sudo apt update
+sudo apt install build-essential libgtk-4-dev libsodium-dev pkg-config
 ```
 
-Then clone the repository and use the compilation command above.
-
-### macOS
-
-**Status: Not yet verified.**
-
-Install [Homebrew](https://brew.sh/) and the required dependencies:
-
-```bash
-brew install gtk4 libsodium pkgconf
-```
-
-Clone the repository:
+Clone and compile the project:
 
 ```bash
 git clone https://github.com/Zorvexil/password-safe.git
 cd password-safe
-```
 
-Try compiling:
+gcc password_safe.c -o password-safe \
+  $(pkg-config --cflags --libs gtk4 libsodium)
 
-```bash
-clang -Wall -Wextra -O2 password_safe.c \
-    -o password-safe \
-    $(pkg-config --cflags --libs gtk4 libsodium)
-```
-
-If compilation succeeds, run:
-
-```bash
 ./password-safe
 ```
 
-macOS support requires testing and may need platform-specific adjustments.
+### Arch Linux
 
-### Windows
-
-**Status: Not yet verified.**
-
-The suggested development environment is [MSYS2](https://www.msys2.org/).
-
-Open the **MSYS2 UCRT64** terminal and install the dependencies:
+Install the dependencies:
 
 ```bash
-pacman -S --needed \
-    mingw-w64-ucrt-x86_64-toolchain \
-    mingw-w64-ucrt-x86_64-gtk4 \
-    mingw-w64-ucrt-x86_64-libsodium \
-    mingw-w64-ucrt-x86_64-pkgconf
+sudo pacman -S base-devel gtk4 libsodium pkgconf
 ```
 
-Clone the repository:
+Then clone and compile the project using the commands shown above.
 
-```bash
-git clone https://github.com/Zorvexil/password-safe.git
-cd password-safe
-```
+### macOS and Windows
 
-Try compiling:
-
-```bash
-gcc -Wall -Wextra -O2 password_safe.c \
-    -o password-safe.exe \
-    $(pkg-config --cflags --libs gtk4 libsodium)
-```
-
-If compilation succeeds, run:
-
-```bash
-./password-safe.exe
-```
-
-Windows support requires further testing. A successful compilation does not necessarily guarantee that the application runs correctly on every Windows system.
+Support for macOS and Windows has not yet been verified. Build instructions for these platforms may be added in the future.
 
 ## Security
 
-Password Safe is a developing open-source project and has not undergone an independent security audit.
+Password Safe is an early-stage project and should not yet be considered suitable for storing sensitive or critical credentials.
 
-- Use a strong, unique master password.
-- Keep secure backups of your encrypted vault.
-- Never commit passwords, private keys, or personal vault files to Git.
-- Review the implementation before storing important credentials.
+Please keep the following points in mind:
 
-Using a cryptographic library does not automatically guarantee that an application is secure. Correct encryption, key derivation, vault handling, and memory management are essential.
+- The application has not undergone an independent security audit.
+- Do not assume that every credential is securely encrypted unless the relevant implementation has been verified.
+- Use a strong, unique master password if the current version supports one.
+- Keep secure backups of important data.
+- Never commit real passwords, private keys, vault files, or other sensitive information to the repository.
+- Using a cryptographic library does not automatically guarantee that an application is secure.
 
-## Project Status
+Security improvements and testing are important parts of the project's ongoing development.
 
-Password Safe is under development.
+## Development Status
 
-Linux is the primary development platform. macOS and Windows build instructions are experimental and have not yet been verified by the maintainer.
+Password Safe is under active development.
 
-Bug reports, suggestions, and contributions are welcome.
+The current priorities are to improve the application's functionality, usability, reliability, and security.
+
+The primary development environment is Linux. Support for other operating systems remains unverified.
+
+Contributions, bug reports, and constructive suggestions are welcome.
 
 ## Contributing
 
+Contributions are welcome!
+
+If you would like to contribute:
+
 1. Fork the repository.
 2. Create a branch for your changes.
-3. Make and test your changes.
-4. Submit a pull request describing your contribution.
+3. Make your changes and test them.
+4. Submit a pull request describing your improvements.
 
-Never include real credentials or personal vault data in issues, pull requests, or test files.
+Please report bugs and suggest improvements through the repository's GitHub Issues page.
 
 ## License
 
 Password Safe is intended to be distributed under the **GNU General Public License v2.0 (GPL-2.0-only)**.
 
-See the `LICENSE` file for the complete license text.
+See the [`LICENSE`](LICENSE) file for the full license text.
 
 ## Dependencies
 
 - [GTK4](https://www.gtk.org/) — Graphical user interface toolkit.
 - [libsodium](https://doc.libsodium.org/) — Cryptographic library.
 
----
+## Maintainer
 
 Maintained by [Zorvexil](https://github.com/Zorvexil).
+
+---
+
+*Built with C and GTK4, with an emphasis on privacy, simplicity, and open-source development.*
