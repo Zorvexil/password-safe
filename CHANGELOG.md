@@ -2,54 +2,48 @@
 
 All notable changes to Password Safe are documented in this file.
 
-The project is currently in early development. This changelog describes the functionality implemented in the current source code.
+This project follows a development-focused changelog. Features are listed according to the current implementation, and future changes will be documented as they are released.
 
 ## [Unreleased]
 
-Changes under development will be documented here as they are implemented.
+### Planned
+- Improve the GTK4 interface and user experience.
+- Improve vault error handling and data integrity.
+- Expand password generation options.
+- Investigate Windows and macOS compatibility.
+- Continue reviewing and improving security.
 
-## [0.1.0-dev] - Initial Development Version
+## [0.1.0-dev] - Initial Development
 
 ### Added
-
-- Initial GTK4 desktop application written in C.
+- Initial public release of the source code.
+- Native desktop interface built with C and GTK4.
 - Local vault storage in the user's application data directory.
-- Master password creation and vault unlocking.
-- Minimum master password length requirement of 12 characters.
+- Master password setup and vault unlocking.
 - Password-based encryption key derivation using Argon2id through libsodium.
-- Authenticated encryption of vault data using `crypto_secretbox`.
+- Authenticated encryption using libsodium's `crypto_secretbox`.
 - Random salt generation for new vaults.
-- Random nonce generation when saving the vault.
-- Account creation with the following fields:
-  - Application or website name.
-  - Account type.
-  - Username.
-  - Email address.
-  - Phone number.
-  - Password.
-- Password details view with a password visibility control.
+- Random nonce generation when saving encrypted data.
+- Account creation with application name, account type, username, email, phone number, and password fields.
+- Account details viewing with a password visibility control.
 - Account deletion with an attempt to restore the entry if saving fails.
 - Random 24-character password generation.
-- Password generation using libsodium's random number generation functions.
-- Encrypted vault saving and loading.
-- Basic validation and error messages for vault creation, unlocking, and saving.
-- Basic password security guidance in the application interface.
+- Basic validation for required fields and master password length.
+- Basic error messages for vault creation, unlocking, and saving.
+- Password security guidance within the application interface.
 
-### Security Notes
-
-- The vault uses libsodium for key derivation and authenticated encryption.
-- The application has not undergone an independent security audit.
-- The current implementation has not been comprehensively tested against file corruption, unexpected shutdowns, or other failure scenarios.
-- The application should not yet be considered production-ready for critical credentials.
+### Security
+- Vault data is encrypted before being written to disk.
+- File creation requests restrictive permissions for the vault and its temporary save file.
+- The project has not undergone an independent security audit.
+- The application is still under development and is not yet recommended for critical credentials.
 
 ### Limitations
-
-- Linux is the primary development environment.
-- Windows and macOS support have not been verified.
-- Editing existing account entries is not currently implemented.
-- The application does not currently include a password strength analysis feature.
-- Password generation currently produces 24-character passwords using a predefined character set.
+- Editing existing account entries is not implemented.
+- Password strength analysis is not implemented.
+- Windows and macOS compatibility has not been verified.
+- The application has not been independently assessed for production security.
 
 ---
 
-*This changelog will be updated as Password Safe develops.*
+*Password Safe is an open-source project under active development. This changelog will evolve alongside the codebase.*
